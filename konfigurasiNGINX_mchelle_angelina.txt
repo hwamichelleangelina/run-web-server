@@ -18,7 +18,7 @@
 
 # Default server configuration
 #
-limit_req_zone $binary_remote_addr zone=mylimit:10m rate=6r/m;
+limit_req_zone $binary_remote_addr zone=limitaccess:10m rate=6r/m;
 
 server {
         listen 80;
@@ -39,7 +39,7 @@ server {
         #
         # include snippets/snakeoil.conf;
         location / {
-                limit_req zone=mylimit;
+                limit_req zone=limitaccess;
                 proxy_pass http://localhost:8000;
                 proxy_set_header Host $host;
                 proxy_set_header X-Real-IP $remote_addr;
